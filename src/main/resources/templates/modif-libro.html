@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <title>Modificar libro</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css" integrity="sha384-zCbKRCUGaJDkqS1kPbPd7TveP5iyJE0EjAuZQTgFLD2ylzuqKfdKlfG/eSrtxUkn" crossorigin="anonymous">
+
+    </head>
+    <body>
+        <ul class="nav nav-tabs">
+            <li class="nav-item">
+                <a class="nav-link active" th:href="@{/}">Inicio</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" th:href="@{/libro/lista}">Listado</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" th:href="@{/libro/nuevo}">Nuevo</a>
+            </li>
+            
+        </ul>
+        
+        <h1 class="display-4">Modificar libro</h1>
+        <div>
+            <div th:if="${exito}!=null" class="alert alert-primary" role="alert">
+                <p th:text="${exito}"></p>
+            </div>
+            <div th:if="${error}!=null" class="alert alert-danger" role="alert">
+                <p th:text="${error}"></p>
+            </div>
+       </div>
+        
+       <div>
+        <div th:if="${exito}!=null" class="alert alert-primary" role="alert">
+            <p th:text="${exito}"></p>
+        </div>
+        <div th:if="${error}!=null" class="alert alert-danger" role="alert">
+            <p th:text="${error}"></p>
+        </div>
+    </div>
+
+    <form th:action="@{/libro/modificar/__${libro.isbn}__}" th:object="${libro}" method="POST">
+        <input hidden th:value="${isbn}" name="isbn">
+        <div class="row">
+            <div class="col">
+                <input type="text" class="form-control" th:value="${libro.titulo}" name="titulo" placeholder="Titulo libro">
+                <br>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                <input type="text" class="form-control" th:value="${libro.anio}" name="anio" placeholder="Año">
+                <br>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                <input type="text" class="form-control" th:value="${libro.ejemplares}" name="ejemplares" placeholder="Total de ejemplares">
+                <br>
+            </div>
+        </div>
+
+        <div class="input-group mb-3">
+            <div class="input-group-prepend">
+                <label class="input-group-text" for="inputGroupSelect01">Autor</label>
+            </div>
+            <select class="custom-select"  id="inputGroupSelect01" name="idAutor">
+                <option th:each="autor : ${autores}" th:text="${autor.nombre}" th:value="${autor.id}" 
+                th:selected="${libro.autor != null ? autor.id == libro.autor.id:false}"></option>
+                
+            </select>
+        </div>
+        
+        </br>
+        
+        <div class="input-group mb-3">
+            <div class="input-group-prepend">
+                <label class="input-group-text" for="inputGroupSelect01">Editorial</label>
+            </div>
+            <select class="custom-select"  id="inputGroupSelect01" name="idEditorial">
+                <option th:each="editorial : ${editoriales}" th:text="${editorial.nombre}" th:value="${editorial.id}"
+                th:selected="${libro.editorial != null ? editorial.id == libro.editorial.id:false}"></option>
+                
+            </select>
+        </div>
+        
+        </br>
+
+<button type="submit" class="btn btn-outline-primary">Guardar</button>
+
+</br>
+
+</form>
+
+       
+       
+
+
+
+
+
+        <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-fQybjgWLrvvRgtW6bFlB7jaZrFsaBXjsOMm/tB9LTS58ONXgqbR9W8oWht/amnpF" crossorigin="anonymous"></script> 
+    </body>
+</html>

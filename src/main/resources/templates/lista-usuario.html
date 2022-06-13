@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <title>Lista usuarios</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css" integrity="sha384-zCbKRCUGaJDkqS1kPbPd7TveP5iyJE0EjAuZQTgFLD2ylzuqKfdKlfG/eSrtxUkn" crossorigin="anonymous">
+    </head>
+    <body>
+        <ul class="nav nav-tabs">
+            <li class="nav-item">
+                <a class="nav-link active" th:href="@{/}">Inicio</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" th:href="@{/usuario/lista}">Listado</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" th:href="@{/usuario/nuevo}">Nuevo</a>
+            </li>
+        </ul>
+        
+        <h1 class="display-4">Listado usuarios</h1>
+        
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th scope="col"></th>
+                    <th scope="cool">Id</th> 
+                    <th scope="col">Documento</th>
+                    <th scope="col">Nombre</th>
+                    <th scope="col">Apellido</th>
+                    <th scope="col">Teléfono</th>
+                    <th scope="col">Mail</th>
+                    <th scope="col">Clave</th>
+                    <th scope="col">Acción</th>
+                    
+                </tr>
+            </thead>
+            <tbody th:each="usuario : ${usuario}">
+                <tr>
+                    <th scope="row"></th>
+                    <td th:text="${usuario.id}"></td>
+                    <td th:text="${usuario.dni}"></td>
+                    <td th:text="${usuario.nombre}"></td>
+                    <td th:text="${usuario.apellido}"></td>
+                    <td th:text="${usuario.telefono}"></td>
+                    <td th:text="${usuario.mail}"></td>
+                    <td th:text="${usuario.clave}"></td>
+                    <td>
+                        <a th:if="${usuario.alta}" th:href="@{/usuario/baja/__${usuario.id}__}" class="btn btn-success">Alta</a>
+                        <a th:unless="${usuario.alta}" th:href="@{/usuario/alta/__${usuario.id}__}" class="btn btn-danger">Baja</a>
+                    </td>
+                    <td>
+                        <div class="container">
+                            <nav class="navbar navbar-expand-lg navbar-light bg-light">
+                                <a class="navbar-brand" th:href="@{/usuario/modificar/__${usuario.id}__}">Modificar</a>
+                            </nav>
+                        </div>
+
+                    </td>  
+                </tr>
+            </tbody>
+        </table>
+
+
+
+
+
+
+        <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-fQybjgWLrvvRgtW6bFlB7jaZrFsaBXjsOMm/tB9LTS58ONXgqbR9W8oWht/amnpF" crossorigin="anonymous"></script> 
+    </body>
+</html>
